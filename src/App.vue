@@ -4,11 +4,19 @@
 
 <script>
 import matchAPI from "@/api/match";
-import { ref } from 'vue';
+import { useStore } from "vuex";
+import { onMounted, ref, computed } from "vue";
 
 export default {
-  async setup() {
-    console.log(await matchAPI.getMatches());
-  }
+  setup() {
+    const store = useStore();
+    const matches = computed(() => store.state.matches);
+    onMounted(async () => {
+      const matchesResult = await matchAPI.getMatches();
+      store.dispatch("saveMatchs", matchesResult);
+    });
+
+    return { matches };
+  },
 }
 </script>
