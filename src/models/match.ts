@@ -19,8 +19,8 @@ export interface MatchResponse {
   embed: string;
   thumbnail: string;
   date: string;
-  team1: TeamResponse;
-  team2: TeamResponse;
+  side1: TeamResponse;
+  side2: TeamResponse;
   competition: CompetitionResponse;
   videos: VideoResponse[];
 }
@@ -72,8 +72,8 @@ export class Match {
     this.embed = match.embed;
     this.thumbnail = match.thumbnail;
     this.date = match.date;
-    this.team1 = new Team(match.team1);
-    this.team2 = new Team(match.team2);
+    this.team1 = new Team(match.side1);
+    this.team2 = new Team(match.side2);
     this.competition = new Competition(match.competition);
     if (match.videos) {
       this.videos = match.videos?.map((video) => {
