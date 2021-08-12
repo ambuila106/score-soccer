@@ -8,7 +8,7 @@ const routes: Array<RouteRecordRaw> = [
     component: GeneralLayout,
     children: [
       {
-        path: "/",
+        path: "",
         name: "Home",
         component: Home,
       },
