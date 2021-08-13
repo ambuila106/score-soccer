@@ -1,5 +1,9 @@
 .match {
+  display: flex;
+  padding: 2rem 4rem;
+
   &__embed {
     width: 600px;
+    margin-right: 1.5rem;
   }
 }
