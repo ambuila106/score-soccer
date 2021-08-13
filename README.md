@@ -1,5 +1,9 @@
 # score-soccer
 
+## Tecnologìas del proyecto
+
+This project was made in Vue 3 with TypeScript, Vuex, Axios and Vue Router. was used TypeScript because using this language will prevent a large majority of errors both in development and production.
+
 ## Project setup
 ```
 npm install
