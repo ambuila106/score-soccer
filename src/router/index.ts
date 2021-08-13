@@ -14,6 +14,12 @@ const routes: Array<RouteRecordRaw> = [
       },
     ]
   },
+
+  {
+    path: "/match/:matchTitle",
+    name: "Match",
+    component: () => import("../views/Match.vue"),
+  }
 ];
 
 const router = createRouter({

@@ -9,6 +9,8 @@ export default createStore({
     teams: [],
     currentTeam: "",
     currentCompetition: "",
+    currentMatch: {},
+    currentMatchTitle: "",
   },
 
   getters: {
@@ -102,12 +104,20 @@ export default createStore({
     },
 
     SAVE_CURRENT_TEAM(state:any, {team, getters} : any) {
+      console.log(team);
       state.currentTeam = team;
       if(team.value) {
         state.currentCompetition = "";
         console.log("team has value",team.value);
         getters.getMatchesFiltered
       }
+    },
+
+    SAVE_MATCH(state:any, {title, getters} : any) {
+      state.currentMatch = getters.getMatchs.find((match: {title: string}) => {
+        return match.title == title;
+      })
+      console.log(state.currentMatch);
     },
 
     SAVE_CURRENT_COMPETITION(state:any, {competition, getters} : any) {
@@ -124,12 +134,17 @@ export default createStore({
     CLEAR_FILTER(state:any) {
       state.currentTeam = "";
       state.currentCompetition = "";
-    }
+    },
+
   },
 
   actions: {
     async saveMatchs({ commit } : any, matchs: Match[]) {
       commit("SAVE_MATCHES", matchs)
+    },
+
+    async saveCurrentMatch({ commit, getters } : any, title: string) {
+      commit("SAVE_MATCH", {title, getters})
     },
 
     async saveCurrentTeam({ commit, getters } : any, team: string) {
