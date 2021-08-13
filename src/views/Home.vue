@@ -14,14 +14,7 @@ import { computed } from "vue";
 export default {
   setup() {
     const store = useStore();
-    console.log(store.getters.getCurrentTeam);
-    const matches = computed(() =>
-      store.getters.getCurrentTeam
-        ? store.getters.getMatchesByTeam
-        : store.getters.getCurrenCompetition
-        ? store.getters.getMatchesByCompetition
-        : store.getters.getRandomMatchs
-    );
+    const matches = computed(() => store.getters.getMatchesFiltered);
 
     return { matches };
   },

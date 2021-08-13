@@ -6,7 +6,7 @@
     </select>
 
     <span>Ligas</span>
-    <select>
+    <select v-model="competitionSelected" @click="filterByCompetition">
       <option v-for="competition in competitions" :key="competition.name">
         {{ competition.name }}
       </option>
@@ -24,13 +24,18 @@ export default {
     const store = useStore();
     const teams = computed(() => store.getters.getTeams);
     const competitions = computed(() => store.getters.getCompetitions);
-    const teamSelected = ref("");
+    const teamSelected = ref();
+    const competitionSelected = ref();
 
     function filterByTeam() {
       store.dispatch("saveCurrentTeam", teamSelected);
+    };
+
+    function filterByCompetition() {
+      store.dispatch("saveCurrentCompetition", competitionSelected);
     }
 
-    return { teams, competitions, filterByTeam, teamSelected };
+    return { teams, competitions, filterByTeam, teamSelected, filterByCompetition, competitionSelected };
   },
 }
 </script>

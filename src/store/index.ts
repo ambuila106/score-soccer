@@ -4,6 +4,7 @@ import { Match } from "@/models/match";
 export default createStore({
   state: {
     matchs: [],
+    matchsRandoms: [],
     competitions: [],
     teams: [],
     currentTeam: "",
@@ -16,7 +17,10 @@ export default createStore({
     },
 
     getRandomMatchs(state: any) {
-      return state.matchs.sort(() => Math.random() - Math.random()).slice(0, 5)
+      if (state.matchsRandoms.length == 0 ) {
+        state.matchsRandoms = state.matchs.sort(() => Math.random() - Math.random()).slice(0, 5);
+      }
+      return state.matchsRandoms;
     },
 
     getCompetitions(state: any) {
@@ -29,12 +33,16 @@ export default createStore({
 
     getMatchesByCompetition(state: any) {
       const competition = state.currentCompetition;
+      console.log("getMatchesByCompetition", competition)
 
-      state.matchs.filter((match: Match) => {
+      const matchesCompetiton = state.matchs.filter((match: Match) => {
         if (match.competition.name == competition) {
+          console.log("match competition name", match.competition.name )
           return true
         }
       });
+
+      return matchesCompetiton;
     },
 
     getMatchesByTeam(state: any) {
@@ -42,7 +50,7 @@ export default createStore({
       console.log("team", team)
 
       const matchesTeam = state.matchs.filter((match: Match) => {
-        if (match.team1.name == team || match.team1.name == team) {
+        if (match.team1.name == team || match.team2.name == team) {
           return true
         }
       });
@@ -50,6 +58,15 @@ export default createStore({
       console.log("matchesTeam", matchesTeam);
 
       return matchesTeam;
+    },
+
+    getMatchesFiltered(state: any, getters: any) {
+      console.log("getters current team", state.currentTeam);
+      return state.currentTeam
+      ? getters.getMatchesByTeam
+      : state.currentCompetition
+      ? getters.getMatchesByCompetition
+      : getters.getRandomMatchs
     }
   },
 
@@ -84,13 +101,24 @@ export default createStore({
       state.teams = teams;
     },
 
-    SAVE_CURRENT_TEAM(state:any, team:string) {
+    SAVE_CURRENT_TEAM(state:any, {team, getters} : any) {
       state.currentTeam = team;
-      console.log(state.currentTeam);
+      if(team.value) {
+        state.currentCompetition = "";
+        console.log("team has value",team.value);
+        getters.getMatchesFiltered
+      }
     },
 
-    SAVE_CURRENT_COMPETITON(state:any, competition:string) {
+    SAVE_CURRENT_COMPETITION(state:any, {competition, getters} : any) {
       state.currentCompetition = competition;
+      console.log(competition.value);
+
+      if(competition.value) {
+        state.currentTeam = "";
+        console.log("competition has value", competition.value);
+        getters.getMatchesFiltered
+      }
     }
   },
 
@@ -99,12 +127,12 @@ export default createStore({
       commit("SAVE_MATCHES", matchs)
     },
 
-    async saveCurrentTeam({ commit } : any, team: string) {
-      commit("SAVE_CURRENT_TEAM", team)
+    async saveCurrentTeam({ commit, getters } : any, team: string) {
+      commit("SAVE_CURRENT_TEAM", {team, getters})
     },
 
-    async saveCurrentCompetition({ commit } : any, competition: string) {
-      commit("SAVE_CURRENT_COMPETITION", competition)
+    async saveCurrentCompetition({ commit, getters } : any, competition: string) {
+      commit("SAVE_CURRENT_COMPETITION", {competition, getters})
     },
   },
   modules: {},
