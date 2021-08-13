@@ -1,7 +1,10 @@
 <template>
   <div class="home">
-    <h1>Partidos Jugados:</h1>
-    <div v-for="match in matches" :key="match.title">
+    <h1 class="home__title">Partidos Jugados:</h1>
+
+    <hr />
+
+    <div class="home__match" v-for="match in matches" :key="match.title">
       <MatchCard :match="match" />
     </div>
   </div>

@@ -1,17 +1,24 @@
 <template>
   <div class="general-layout">
     <button @click="clear()">Todos</button>
-    <span>Equipos</span>
-    <select v-model="teamSelected" @click="filterByTeam()">
-      <option v-for="team in teams" :key="team.name">{{ team.name }}</option>
-    </select>
+    <div>
+      <span class="general-layout__label">Equipos</span>
 
-    <span>Ligas</span>
-    <select v-model="competitionSelected" @click="filterByCompetition()">
-      <option v-for="competition in competitions" :key="competition.name">
-        {{ competition.name }}
-      </option>
-    </select>
+      <select v-model="teamSelected" @click="filterByTeam()">
+        <option v-for="team in teams" :key="team.name">{{ team.name }}</option>
+      </select>
+    </div>
+
+    <div>
+      <span class="general-layout__label">Ligas</span>
+
+      <select v-model="competitionSelected" @click="filterByCompetition()">
+        <option v-for="competition in competitions" :key="competition.name">
+          {{ competition.name }}
+        </option>
+      </select>
+    </div>
+
   </div>
   <router-view />
 </template>

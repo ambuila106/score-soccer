@@ -12,14 +12,13 @@ const routes: Array<RouteRecordRaw> = [
         name: "Home",
         component: Home,
       },
+      {
+        path: "/match/:matchTitle",
+        name: "Match",
+        component: () => import("../views/Match.vue"),
+      }
     ]
   },
-
-  {
-    path: "/match/:matchTitle",
-    name: "Match",
-    component: () => import("../views/Match.vue"),
-  }
 ];
 
 const router = createRouter({

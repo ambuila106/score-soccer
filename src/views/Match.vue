@@ -1,13 +1,17 @@
 <template>
   <div class="match">
-    <div class="match__embed">
-      <div v-html="match.embed"></div>
-    </div>
-
+    <a class="back-button" href="/">Home</a>
+    <hr />
     <div class="match__content">
-      <h1>{{ match.title }}</h1>
-      <h3>{{ match.competition.name }}</h3>
-      <span>{{ dateToLanguage(match.date) }}</span>
+      <div class="match__embed">
+        <div v-html="match.embed"></div>
+      </div>
+
+      <div class="match__description">
+        <h1>{{ match.title }}</h1>
+        <h3>{{ match.competition.name }}</h3>
+        <span>{{ dateToLanguage(match.date) }}</span>
+      </div>
     </div>
   </div>
 </template>

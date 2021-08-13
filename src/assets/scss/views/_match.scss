@@ -1,6 +1,13 @@
 .match {
-  display: flex;
   padding: 2rem 4rem;
+
+  &__content {
+    display: flex;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
 
   &__embed {
     width: 600px;

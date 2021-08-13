@@ -8,7 +8,13 @@
   font-family: "Open Sans", sans-serif;
 }
 
+body {
+  margin: 0;
+  background-color: #EEEEEE;
+}
+
 select {
+  width: 200px;
   margin: 0 1.5rem 0 .5rem;
   cursor:pointer;
 }
@@ -16,4 +22,15 @@ select {
 button {
   margin: 0 1.5rem 0 0;
   cursor:pointer;
+  background-color: #F8485E;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: .25rem 1rem;
+}
+
+.back-button {
+  color: #00C1D4;
+  text-decoration: none;
+  margin-bottom: 1rem;
 }
