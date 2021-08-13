@@ -1,12 +1,13 @@
 <template>
   <div class="general-layout">
+    <button @click="clear()">Todos</button>
     <span>Equipos</span>
     <select v-model="teamSelected" @click="filterByTeam()">
       <option v-for="team in teams" :key="team.name">{{ team.name }}</option>
     </select>
 
     <span>Ligas</span>
-    <select v-model="competitionSelected" @click="filterByCompetition">
+    <select v-model="competitionSelected" @click="filterByCompetition()">
       <option v-for="competition in competitions" :key="competition.name">
         {{ competition.name }}
       </option>
@@ -28,14 +29,27 @@ export default {
     const competitionSelected = ref();
 
     function filterByTeam() {
+      console.log("test")
       store.dispatch("saveCurrentTeam", teamSelected);
-    };
+    }
 
     function filterByCompetition() {
       store.dispatch("saveCurrentCompetition", competitionSelected);
     }
 
-    return { teams, competitions, filterByTeam, teamSelected, filterByCompetition, competitionSelected };
+    function clear() {
+      store.dispatch("clearFilter", competitionSelected);
+    }
+
+    return {
+      teams,
+      competitions,
+      filterByTeam,
+      teamSelected,
+      filterByCompetition,
+      competitionSelected,
+      clear,
+    };
   },
 }
 </script>

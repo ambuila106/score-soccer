@@ -119,6 +119,11 @@ export default createStore({
         console.log("competition has value", competition.value);
         getters.getMatchesFiltered
       }
+    },
+
+    CLEAR_FILTER(state:any) {
+      state.currentTeam = "";
+      state.currentCompetition = "";
     }
   },
 
@@ -134,6 +139,10 @@ export default createStore({
     async saveCurrentCompetition({ commit, getters } : any, competition: string) {
       commit("SAVE_CURRENT_COMPETITION", {competition, getters})
     },
+
+    async clearFilter({ commit } : any) {
+      commit("CLEAR_FILTER")
+    }
   },
   modules: {},
 });

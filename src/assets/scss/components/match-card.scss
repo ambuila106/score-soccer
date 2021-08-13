@@ -1,0 +1,20 @@
+.match-card {
+  display: flex;
+  margin-top: 1rem;
+
+  &__head {
+    width: 380px;
+    height: 210px;
+    margin-right: 1rem;
+
+    img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &__content {
+    width: 300px;
+  }
+}
